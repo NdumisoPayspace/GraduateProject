@@ -1,45 +1,64 @@
-﻿@model GraduateProject.Models.ProfileViewModel
+﻿@model IEnumerable<GraduateProject.Models.Profile>
 
-<h1>View Profile</h1>
-
-
-<div class="row">
-    <hr />
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Name)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Name)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Surname)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Surname)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.DOB)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.DOB)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Age)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Age)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Country)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Country)
-    </dd>
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.City)
-    </dt>
-    <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.City)
-    </dd>
+<h1>Profiles</h1>
+<button class="btn btn-primary" >
+    <a asp-controller="Profile" asp-action="Create" style="color: white;">
+        Create New Profile
+    </a>
+</button>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>DOB</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var profile in Model)
+            {
+                <tr>
+                    <th>
+                        @profile.Name
+                    </th>
+                    <th>
+                        @profile.Surname
+                    </th>
+                    <th>
+                        @profile.Dob
+                    </th>
+                    <th>
+                        @profile.Age
+                    </th>
+                    <th>
+                        @profile.Country
+                    </th>
+                    <th>
+                        @profile.City
+                    </th>
+                    <th>
+                        <button class="btn btn-primary">
+                            <a asp-controller="Profile" asp-action="Details" asp-route-id="@profile.Id" style="color: white;">
+                                View
+                            </a>
+                        </button>
+                        <button class="btn btn-warning">
+                            <a asp-controller="Profile" asp-action="Edit" asp-route-id="@profile.Id" style="color: white;">
+                                Edit
+                            </a>
+                        </button>
+                        <button class="btn btn-danger">
+                            <a asp-controller="Profile" asp-action="Delete" asp-route-id="@profile.Id" style="color: white;">
+                                Delete
+                            </a>
+                        </button>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-

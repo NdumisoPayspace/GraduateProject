@@ -1,6 +1,13 @@
+using GraduateProject.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+var configuaration = configBuilder.Build();
+
 // Add services to the container.
+builder.Services.AddDbContext<GraduateProjectDbContext>(options => options.UseSqlServer(configuaration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
